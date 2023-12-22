@@ -1,0 +1,11 @@
+body {
+  background-color: #09121c;
+	min-width: 600px;
+	width: auto !important;
+	width: 600px;
+}
+
+* {
+  font-family: sans-serif;
+  color: #eee;
+}
