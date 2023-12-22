@@ -70,13 +70,13 @@ function sRGBtoHSL(rgb) {
   }
   var s = delta/(1 - Math.abs(2*l - 1));
   if (cmax == rgb[0]) {
-    return [60 * ((rgb[1]-rgb[2])/delta)%6,s,l];
+    return [60 * (((rgb[1]-rgb[2])/delta + 6)%6), s, l];
   }
   if (cmax == rgb[1]) {
-    return [60 * ((rgb[2] - rgb[0])/delta + 2) ,s,l];
+    return [60 * ((rgb[2] - rgb[0])/delta + 2), s, l];
   }
   if (cmax == rgb[2]) {
-    return [60 * ((rgb[0] - rgb[1])/delta + 4),s,l];
+    return [60 * ((rgb[0] - rgb[1])/delta + 4), s, l];
   }
 }
 
@@ -113,7 +113,7 @@ function sRGBtoHSV(rgb) {
   }
   var s = delta/cmax;
   if (cmax == rgb[0]) {
-    return [60 * ((rgb[1]-rgb[2])/delta)%6,s,cmax];
+    return [60 * (((rgb[1]-rgb[2])/delta + 6)%6),s,cmax];
   }
   if (cmax == rgb[1]) {
     return [60 * ((rgb[2] - rgb[0])/delta + 2) ,s,cmax];
