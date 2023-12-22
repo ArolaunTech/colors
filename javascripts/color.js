@@ -81,7 +81,7 @@ function sRGBtoHSL(rgb) {
 function HSLtosRGB(hsl) {
   //Convert HSL to sRGB
   var c = (1 - Math.abs(2*hsl[2] - 1)) * hsl[1];
-  var m = hsl[1] - c/2;
+  var m = hsl[2] - c/2;
   var x = c * (1 - Math.abs((hsl[0]/60)%2 - 1));
   if (hsl[0] < 60) {
     return [c+m, x+m, m];
