@@ -4,6 +4,8 @@
 // - https://en.wikipedia.org/wiki/SRGB
 // - https://www.rapidtables.com/convert/color/cmyk-to-rgb.html
 // - https://www.rapidtables.com/convert/color/rgb-to-cmyk.html
+// - https://www.rapidtables.com/convert/color/rgb-to-hsl.html
+// - https://www.rapidtables.com/convert/color/hsl-to-rgb.html
 
 function linRtosR(r) {
   //Helper function for linRGBtosRGB(r, g, b)
@@ -43,7 +45,7 @@ function XYZtolinRGB(xyz) {
 
 function sRGBtoCMYK(rgb) {
   //Convert sRGB to CMYK
-  k = 1-Math.max(...rgb);
+  var k = 1-Math.max(...rgb);
   if (k == 1) {
     return [0,0,0,1];
   }
@@ -53,4 +55,48 @@ function sRGBtoCMYK(rgb) {
 function CMYKtosRGB(cmyk) {
   //Convert CMYK to sRGB
   return [(1-cmyk[0])*(1-cmyk[3]), (1-cmyk[1])*(1-cmyk[3]), (1-cmyk[2])*(1-cmyk[3])];
+}
+
+function sRGBtoHSL(rgb) {
+  //Convert sRGB to HSL
+  var cmax = Math.max(...rgb);
+  var cmin = Math.min(...rgb);
+  var delta = cmax-cmin;
+  var l = (cmax + cmin)/2;
+  if (delta == 0) {
+    return [0, 0, l];
+  }
+  var s = delta/(1 - Math.abs(2*l - 1));
+  if (cmax == rgb[0]) {
+    return [60 * ((rgb[1]-rgb[2])/delta)%6,s,l];
+  }
+  if (cmax == rgb[1]) {
+    return [60 * ((rgb[2] - rgb[0])/delta + 2) ,s,l];
+  }
+  if (cmax == rgb[2]) {
+    return [60 * ((rgb[0] - rgb[1])/delta + 4),s,l];
+  }
+}
+
+function HSLtosRGB(hsl) {
+  //Convert HSL to sRGB
+  var c = (1 - Math.abs(2*hsl[2] - 1)) * hsl[1];
+  var m = hsl[1] - c/2;
+  var x = c * (1 - Math.abs((hsl[0]/60)%2 - 1));
+  if (hsl[0] < 60) {
+    return [c+m, x+m, m];
+  }
+  if (hsl[0] < 120) {
+    return [x+m, c+m, m];
+  }
+  if (hsl[0] < 180) {
+    return [m, c+m, x+m];
+  }
+  if (hsl[0] < 240) {
+    return [m, x+m, c+m];
+  }
+  if (hsl[0] < 300) {
+    return [x+m, m, c+m];
+  }
+  return [c+m, m, x+m];
 }
