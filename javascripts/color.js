@@ -128,19 +128,19 @@ function HSVtosRGB(hsv) {
   var c = hsv[1] * hsv[2];
   var m = hsv[2] - c;
   var x = c * (1 - Math.abs((hsv[0]/60)%2 - 1));
-  if (hsl[0] < 60) {
+  if (hsv[0] < 60) {
     return [c+m, x+m, m];
   }
-  if (hsl[0] < 120) {
+  if (hsv[0] < 120) {
     return [x+m, c+m, m];
   }
-  if (hsl[0] < 180) {
+  if (hsv[0] < 180) {
     return [m, c+m, x+m];
   }
-  if (hsl[0] < 240) {
+  if (hsv[0] < 240) {
     return [m, x+m, c+m];
   }
-  if (hsl[0] < 300) {
+  if (hsv[0] < 300) {
     return [x+m, m, c+m];
   }
   return [c+m, m, x+m];
