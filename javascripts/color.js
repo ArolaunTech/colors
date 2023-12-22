@@ -44,6 +44,9 @@ function XYZtolinRGB(xyz) {
 function sRGBtoCMYK(rgb) {
   //Convert sRGB to CMYK
   k = 1-Math.max(...rgb);
+  if (k == 1) {
+    return [0,0,0,1];
+  }
   return [(1-rgb[0]-k)/(1-k), (1-rgb[1]-k)/(1-k), (1-rgb[2]-k)/(1-k), k];
 }
 
