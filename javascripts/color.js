@@ -2,6 +2,8 @@
 //RGB will be provided in 0-1 format
 //Sources:
 // - https://en.wikipedia.org/wiki/SRGB
+// - https://www.rapidtables.com/convert/color/cmyk-to-rgb.html
+// - https://www.rapidtables.com/convert/color/rgb-to-cmyk.html
 
 function linRtosR(r) {
   //Helper function for linRGBtosRGB(r, g, b)
@@ -37,4 +39,15 @@ function linRGBtoXYZ(rgb) {
 function XYZtolinRGB(xyz) {
   //Converts CIE XYZ (D65 whitepoint) to linear RGB
   return [3.2406255*xyz[0] - 1.537208*xyz[1] - 0.4986286*xyz[2], -0.9689307*xyz[0] + 1.8757561*xyz[1] + 0.0415175*xyz[2], 0.0557101*xyz[0] - 0.2040211*xyz[1] + 1.0569959*xyz[2]];
+}
+
+function sRGBtoCMYK(rgb) {
+  //Convert sRGB to CMYK
+  k = 1-Math.max(...rgb);
+  return [(1-rgb[0]-k)/(1-k), (1-rgb[1]-k)/(1-k), (1-rgb[2]-k)/(1-k), k];
+}
+
+function CMYKtosRGB(cmyk) {
+  //Convert CMYK to sRGB
+  return [(1-cmyk[0])*(1-cmyk[3]), (1-cmyk[1])*(1-cmyk[3]), (1-cmyk[2])*(1-cmyk[3])];
 }
