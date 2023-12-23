@@ -42,7 +42,12 @@ function sRGBtoRGB(col) { //Turns sRGB into linear RGB
   return [sRtolinR(col[0]), sRtolinR(col[1]), sRtolinR(col[2])];
 }
 
-graph['sRGB']['XYZ'] = function(col) {
+graph['sRGB']['XYZ'].push(function(col) {
   var linrgb = sRGBtoRGB(col);
   return [0.4124*linrgb[0] + 0.3576*linrgb[1] + 0.1805*linrgb[2], 0.2126*linrgb[0] + 0.7152*linrgb[1] + 0.0722*linrgb[2] , 0.0193*linrgb[0] + 0.1192*linrgb[1] + 0.9505*linrgb[2]];
-}
+});
+
+graph['XYZ']['sRGB'].push(function(col) {
+  var linrgb = [3.2406255*col[0] - 1.537208*col[1] - 0.4986286*col[2], -0.9689307*col[0] + 1.8757561*col[1] + 0.0415175*col[2], 0.0557101*col[0] - 0.2040211*col[1] + 1.0569959*col[2]];
+  return RGBtosRGB(linrgb);
+});
