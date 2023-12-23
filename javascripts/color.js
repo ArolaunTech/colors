@@ -1,7 +1,7 @@
 //Handles color conversions and other functions
 
 //Color conversion graph
-var colorspaces = ['sRGB', 'RGB', 'HSV', 'HSL', 'CMYK', 'XYZ', 'Lab', 'Luv', 'HSLuv']; //All colorspaces handled by this script
+var colorspaces = ['sRGB', 'HSV', 'HSL', 'CMYK', 'XYZ', 'Lab', 'Luv', 'HSLuv']; //All colorspaces handled by this script
 var graph = {
   
 };
@@ -26,3 +26,18 @@ function linRtosR(r) {
   return 1.055*Math.pow(r, 5/12)-0.055;
 }
 
+function sRtolinR(r) {
+  //Helper function for sRGBtoRGB
+  if (r < 0.04045) {
+    return r/12.92;
+  }
+  return Math.pow((r + 0.055)/1.055, 12/5);
+}
+
+function RGBtosRGB(col) { //Turn linear RGB into sRGB
+  return [linRtosR(col[0]), linRtosR(col[1]), linRtosR(col[2])];
+}
+
+function sRGBtoRGB(col) { //Turns sRGB into linear RGB
+  return [sRtolinR(col[0]), sRtolinR(col[1]), sRtolinR(col[2])];
+}
