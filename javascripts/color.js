@@ -51,3 +51,27 @@ graph['XYZ']['sRGB'].push(function(col) {
   var linrgb = [3.2406255*col[0] - 1.537208*col[1] - 0.4986286*col[2], -0.9689307*col[0] + 1.8757561*col[1] + 0.0415175*col[2], 0.0557101*col[0] - 0.2040211*col[1] + 1.0569959*col[2]];
   return RGBtosRGB(linrgb);
 });
+
+graph['sRGB']['HSV'].push(function(col) {
+  var cmax = Math.max(...col);
+  var cmin = Math.min(...col);
+  var delta = cmax-cmin;
+
+  var v = cmax;
+  if (cmax == 0) {
+    var s = 0;
+  } else {
+    var s = delta/cmax;
+  }
+  if (delta == 0) {
+    var h = 0;
+  } else if (cmax == col[0]) {
+    var h = ((col[1]-col[2])/delta + 6)%6;
+  } else if (cmax == col[1]) {
+    var h = 2 + (col[2]-col[0])/delta;
+  } else {
+    var h = 4 + (col[0]-col[1])/delta;
+  }
+  h *= 60;
+  return [h, s, v];
+}
