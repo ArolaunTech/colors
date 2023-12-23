@@ -41,3 +41,8 @@ function RGBtosRGB(col) { //Turn linear RGB into sRGB
 function sRGBtoRGB(col) { //Turns sRGB into linear RGB
   return [sRtolinR(col[0]), sRtolinR(col[1]), sRtolinR(col[2])];
 }
+
+graph['sRGB']['XYZ'] = function(col) {
+  var linrgb = sRGBtoRGB(col);
+  return [0.4124*linrgb[0] + 0.3576*linrgb[1] + 0.1805*linrgb[2], 0.2126*linrgb[0] + 0.7152*linrgb[1] + 0.0722*linrgb[2] , 0.0193*linrgb[0] + 0.1192*linrgb[1] + 0.9505*linrgb[2]];
+}
