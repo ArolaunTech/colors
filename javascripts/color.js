@@ -17,6 +17,22 @@ for (var i = 0; i < colorspaces.length; i++) {
 }
 console.log(graph);
 
+//Color conversion test
+//Basic principle: color conversion should be inversible
+var startcolorspace = 'sRGB';
+var startmin = [0,0,0];
+var startmax = [1,1,1];
+
+function test(SAMPLES, threshold) {
+  for (var i = 0; i < SAMPLES; i++) {
+    var testcolor = [];
+    for (var j = 0; j < startmin.length; j++) {
+      testcolor.push(startmin[j] + (startmax[j]-starmin[j])*Math.random());
+    }
+    console.log(testcolor);
+  }
+}
+
 //Color conversion functions
 function linRtosR(r) {
   //Helper function for RGBtosRGB
@@ -72,4 +88,7 @@ graph['sRGB']['HSV'].push(function(col) {
   }
   h *= 60;
   return [h, s, v];
-}
+});
+
+//Test color conversion
+test(1000, 0.001);
