@@ -25,21 +25,20 @@ var startmin = [0,0,0];
 var startmax = [1,1,1];
 
 function test(SAMPLES, threshold) {
+  var maxbias = 0;
   for (var i = 0; i < SAMPLES; i++) {
     var testcolor = [];
     for (var j = 0; j < startmin.length; j++) {
       testcolor.push(startmin[j] + (startmax[j]-startmin[j])*Math.random());
     }
-    console.log(testcolor);
     var endcolor = graph[endcolorspace][startcolorspace][0](graph[startcolorspace][endcolorspace][0](testcolor));
-    console.log(endcolor);
     for (var j = 0; j < startmin.length; j++) {
       endcolor[j] -= testcolor[j];
     }
-    console.log(endcolor);
     endcolor = Math.hypot(...endcolor);
-    console.log(endcolor);
+    maxbias = Math.max(maxbias, endcolor);
   }
+  return maxbias;
 }
 
 //Color conversion functions
@@ -100,4 +99,4 @@ graph['sRGB']['HSV'].push(function(col) {
 });
 
 //Test color conversion
-test(1000, 0.001);
+console.log(test(1000, 0.001));
