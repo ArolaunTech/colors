@@ -27,7 +27,7 @@ function test(SAMPLES, threshold) {
   for (var i = 0; i < SAMPLES; i++) {
     var testcolor = [];
     for (var j = 0; j < startmin.length; j++) {
-      testcolor.push(startmin[j] + (startmax[j]-starmin[j])*Math.random());
+      testcolor.push(startmin[j] + (startmax[j]-startmin[j])*Math.random());
     }
     console.log(testcolor);
   }
