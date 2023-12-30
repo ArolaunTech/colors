@@ -30,8 +30,12 @@ function test(SAMPLES, threshold) {
     for (var j = 0; j < startmin.length; j++) {
       testcolor.push(startmin[j] + (startmax[j]-startmin[j])*Math.random());
     }
-    console.log(testcolor);
-    console.log(graph[endcolorspace][startcolorspace][0](graph[startcolorspace][endcolorspace][0](testcolor)));
+    var endcolor = graph[endcolorspace][startcolorspace][0](graph[startcolorspace][endcolorspace][0](testcolor));
+    for (var j = 0; j < startmin.length; j++) {
+      endcolor[j] -= testcolor[j];
+    }
+    endcolor = Math.hypot(endcolor);
+    console.log(endcolor);
   }
 }
 
