@@ -24,7 +24,7 @@ var endcolorspace = 'RGB';
 var startmin = [0,0,0];
 var startmax = [1,1,1];
 
-function test(SAMPLES, threshold) {
+function test(SAMPLES) {
   var maxbias = 0;
   for (var i = 0; i < SAMPLES; i++) {
     var testcolor = [];
