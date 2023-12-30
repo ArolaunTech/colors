@@ -20,6 +20,7 @@ console.log(graph);
 //Color conversion test
 //Basic principle: color conversion should be inversible
 var startcolorspace = 'sRGB';
+var endcolorspace = 'RGB';
 var startmin = [0,0,0];
 var startmax = [1,1,1];
 
@@ -30,6 +31,7 @@ function test(SAMPLES, threshold) {
       testcolor.push(startmin[j] + (startmax[j]-startmin[j])*Math.random());
     }
     console.log(testcolor);
+    console.log(graph[endcolorspace][startcolorspace][0](graph[startcolorspace][endcolorspace][0](testcolor)));
   }
 }
 
