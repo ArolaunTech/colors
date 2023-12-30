@@ -37,7 +37,7 @@ function test(SAMPLES, threshold) {
       endcolor[j] -= testcolor[j];
     }
     console.log(endcolor);
-    endcolor = Math.hypot(endcolor);
+    endcolor = Math.hypot(...endcolor);
     console.log(endcolor);
   }
 }
