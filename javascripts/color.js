@@ -15,9 +15,8 @@ for (var i = 0; i < colorspaces.length; i++) {
     graph[colorspaces[i]][colorspaces[j]] = [];
   }
 }
-console.log(graph);
 
-//Color conversion test
+//Color conversion test (debug)
 //Basic principle: color conversion should be inversible
 var startcolorspace = 'sRGB';
 var endcolorspace = 'RGB';
@@ -100,3 +99,4 @@ graph['sRGB']['HSV'].push(function(col) {
 
 //Test color conversion
 console.log(test(1000, 0.001));
+console.log(graph);

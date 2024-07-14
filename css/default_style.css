@@ -1,11 +1,40 @@
 body {
-  background-color: #09121c;
+	background-color: #eee;
 	min-width: 600px;
 	width: auto !important;
 	width: 600px;
+	margin: 0;
 }
 
 * {
-  font-family: Montserrat, sans-serif;
-  color: #eee;
+	font-family: Montserrat, sans-serif;
+	color: #222;
+}
+
+.menu {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0;
+	background-color: #ddd;
+	width: 100%;
+	overflow: hidden;
+}
+
+.menuitem {
+	float: left;
+}
+
+.menulink {
+	display: block;
+	padding: 8px;
+	background-color: #ddd;
+	text-decoration: none;
+}
+
+.current {
+	background-color: #d4d4d4;
+}
+
+.menulink:hover {
+	background-color: #ccc;
 }
