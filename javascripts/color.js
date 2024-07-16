@@ -56,6 +56,23 @@ function sRtolinR(r) {
 	return Math.pow((r + 0.055)/1.055, 12/5);
 }
 
+function luminanceF(x) {
+	if (x > 216/24389) {
+		return Math.cbrt(x);
+	}
+	return x * 841/108 + 4/29
+}
+
+//Misc
+function brightsRGB(col) {
+	return (0.2126*sRtolinR(col[0]) + 0.7152*sRtolinR(col[1]) + 0.0722*sRtolinR(col[2]) > 35937/195112);
+}
+
+function getLuminanceFromsRGB(col) {
+	let xyz = graph['RGB']['XYZ'][0](graph['sRGB']['RGB'][0](col));
+	return 116*luminanceF(xyz[1]) - 16;
+}
+
 graph['RGB']['sRGB'].push(function(col) { //Turn linear RGB into sRGB
 	return [linRtosR(col[0]), linRtosR(col[1]), linRtosR(col[2])];
 });

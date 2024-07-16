@@ -8,9 +8,14 @@ let colorhex = document.getElementById("colorhex");
 let colorrgb = document.getElementById("colorrgb");
 let colorhsv = document.getElementById("colorhsv");
 
+let paletteedit = document.getElementById("paletteedit");
+
 var h = 0;
 var s = 0;
 var v = 1;
+
+var currentPalette = 1;
+var oldPalette = 0;
 
 function displayFinalColor() {
 	let col = graph['HSV']['sRGB'][0]([h, s, v]);
@@ -21,11 +26,22 @@ function displayFinalColor() {
 
 	finalcolordisplay.style.background = hex;
 	colorhex.innerText = hex;
-	colorrgb.innerText = "rgb(" + Math.round(255 * col[0]) + " " + Math.round(255*col[1]) + " " + Math.round(255*col[2]) + ")";
+	colorrgb.innerText = "rgb(" + parseInt(255 * col[0]) + " " + parseInt(255*col[1]) + " " + parseInt(255*col[2]) + ")";
 	colorhsv.innerHTML = "hsv(" + h + "&deg; " + Math.round(100*s) + "% " + Math.round(100*v) + "%)";
+
+	document.getElementById("palette" + currentPalette).style.background = hex;
+
+	let palettetext = document.getElementById("palettehex" + currentPalette);
+	palettetext.innerText = hex;
+
+	if (brightsRGB(col)) {
+		palettetext.style.color = "#000";
+	} else {
+		palettetext.style.color = "#fff";
+	}
 }
 
-function setColor() {
+function setColorInternal() {
 	let hvalue = hselect.value;
 	h = parseInt(hvalue);
 	let col = graph['HSV']['sRGB'][0]([h, 1, 1]);
@@ -36,6 +52,14 @@ function setColor() {
 		(parseInt(col[2]*255)+256).toString(16).slice(1);
 
 	displayFinalColor();
+}
+
+function setColor(event) {
+	findMousePosAndState(event);
+
+	if (mouseDown) {
+		setColorInternal();
+	}
 }
 
 function moveSVPicker(event) {
@@ -56,8 +80,43 @@ function moveSVPicker(event) {
 	}
 }
 
-setColor();
+function selectPalette(event) {
+	document.getElementById("palette" + oldPalette).classList.remove("paletteselected");
+	document.getElementById("palette" + currentPalette).classList.add("paletteselected");
+
+	paletteedit.innerText = "Editing color " + currentPalette;
+}
+
+setColorInternal();
 
 hselect.addEventListener("mousemove", setColor);
+hselect.addEventListener("mousedown", setColor);
+hselect.addEventListener("mouseup", setColorInternal);
 backpicker.addEventListener("mousemove", moveSVPicker);
 backpicker.addEventListener("mousedown", moveSVPicker);
+
+document.getElementById("palette1").addEventListener("mousedown", (e)=>{
+	oldPalette=currentPalette;
+	currentPalette=1;
+	selectPalette(e);
+});
+document.getElementById("palette2").addEventListener("mousedown", (e)=>{
+	oldPalette=currentPalette;
+	currentPalette=2;
+	selectPalette(e);
+});
+document.getElementById("palette3").addEventListener("mousedown", (e)=>{
+	oldPalette=currentPalette;
+	currentPalette=3;
+	selectPalette(e);
+});
+document.getElementById("palette4").addEventListener("mousedown", (e)=>{
+	oldPalette=currentPalette;
+	currentPalette=4;
+	selectPalette(e);
+});
+document.getElementById("palette5").addEventListener("mousedown", (e)=>{
+	oldPalette=currentPalette;
+	currentPalette=5;
+	selectPalette(e);
+});
