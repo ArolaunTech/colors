@@ -6,6 +6,7 @@
 		</title>
 
 		<link rel='stylesheet' href='../css/default_style.css'>
+		<link rel='stylesheet' href='../css/picker.css'>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,500;0,700;1,200;1,500;1,700&display=swap" rel="stylesheet">
@@ -17,8 +18,48 @@
 			<li class="menuitem"><a class="menulink" href='../index.html'>Home</a></li>
 			<li class="menuitem"><a class="menulink current" href='picker.html'>Color Picker</a></li>
 		</ul>
-		
 
+		<div class="centered">
+			<h2>Color Picker</h2>
+		</div>
+		<div class="centered">
+			<svg viewBox="0 0 100 67" width="360px" height="240px" id="backgroundpicker">
+				<defs>
+					<linearGradient id="saturation" x1="100%" x2="0%" y1="0%" y2="0%">
+						<stop offset="0%" stop-color="white" stop-opacity="0"/>
+						<stop offset="100%" stop-color="white" stop-opacity="1"/>
+					</linearGradient>
+					<linearGradient id="brightness" x1="0%" x2="0%" y1="0%" y2="100%">
+						<stop offset="0%" stop-color="black" stop-opacity="0"/>
+						<stop offset="100%" stop-color="black" stop-opacity="1"/>
+					</linearGradient>
+				</defs>
+
+				<rect width="100px" height="67px" fill="#808080" id="colorselect"/>
+				<rect width="100px" height="67px" fill="url(#saturation)"/>
+				<rect width="100px" height="67px" fill="url(#brightness)"/>
+
+				<circle cx="0px" cy="0px" r="1px" fill="white" stroke="black" stroke-width="0.3px" id="svpicker"/>
+			</svg>
+		</div>
+		<br/>
+		<div class="centered">
+			<input type="range" min="0" max="360" id="hselect"/>
+		</div>
+		<br/>
+		<div class="centered">
+			<div id="finalcolorcontainer">
+				<div id="colordisplay"></div>
+				<div id="colorcontainer">
+					<p id="colorhex">#ffffff</p>
+					<p id="colorrgb">rgb(255 255 255)</p>
+					<p id="colorhsv">hsv(180&deg; 0% 100%)</p>
+				</div>
+			</div>
+		</div>
+
+		<script src='../javascripts/input.js'></script>
 		<script src='../javascripts/color.js'></script>
+		<script src='../javascripts/picker.js'></script>
 	</body>
 </html>
